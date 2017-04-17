@@ -12,9 +12,15 @@ import android.view.View;
 import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import java.util.ArrayList;
 import java.util.List;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
+
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.POPULARITY;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.RATING;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.hasInternetConnection;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.showConnectionError;
 
 public class ListMovieActivity extends AppCompatActivity
         implements ListMoviewContract.View{
@@ -40,7 +46,7 @@ public class ListMovieActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         setPresenter();
         setAdapter();
-        presenter.loadData(ListMovieOrderBy.POPULARITY);
+        presenter.loadData(POPULARITY);
 
     }
 
@@ -57,18 +63,31 @@ public class ListMovieActivity extends AppCompatActivity
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list_movie, menu);
         return true;
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.ordey_by_popularity :
+                reloadList(POPULARITY);
+                return true;
+            case R.id.order_by_rating :
+                reloadList(RATING);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-        return (id == R.id.action_settings) ? true : super.onOptionsItemSelected(item);
+    private void reloadList(ListMovieOrderBy type) {
+        List<Movie> movieList = new ArrayList<>();
+        if(hasInternetConnection(this)) {
+            setAdapter();
+            ListMovieAsyncTask task =  new ListMovieAsyncTask(this);
+            task.execute(type);
+        } else {
+            showConnectionError(this);
+        }
     }
 
     @Override
