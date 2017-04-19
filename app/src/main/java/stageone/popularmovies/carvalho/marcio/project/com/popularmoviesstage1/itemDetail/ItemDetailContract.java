@@ -9,7 +9,7 @@ public interface ItemDetailContract {
         void setCollapsePallete(Palette palette);
     }
     interface Presenter{
-        void loadMovieImage(ImageView imageView, Movie movie);
-        void loadCollapseImage(ImageView imageView, Movie movie);
+        void loadMovieImage(ImageView imageView, String imagePath);
+        void loadCollapseImage(ImageView imageView, String imagePath);
     }
 }

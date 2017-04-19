@@ -16,22 +16,18 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.da
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 
 public class MovieDBConnection {
-    //* v3 auth
     private final static String API_DBKEY = "3502fee1eb0ff1815d316905b20662eb";
-    //* v4 auth
-    private final static String API_READTOKEN
-            = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNTAyZmVlMWViMGZmMTgxNWQzMTY5MDViMjA2NjJlYiIsInN1YiI6IjU4ZTQxNDRkYzNhMzY4NzMwMjAyMjM1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cqALRLUaWomw-HzfnNdWb1YXeWHNPFMAHobQ6w-037M";
     private final static String MOVIEDB_ENDPOINT = "https://api.themoviedb.org/";
     private final static String PICASSO_ENDPOINT = "http://image.tmdb.org/t/p/w185";
     private final static String POPULARITY_PATH = "3/movie/popular";
     private final static String TOP_RATED_PATH = "3/movie/top_rated";
     private static MovieDBConnection dbConnection;
 
-    public String getPicassoImageURL(Movie movie) {
+    public String getPicassoImageURL(String picture) {
         StringBuilder imgUrl = new StringBuilder();
-        if(movie.getPosterPath() != null) {
+        if(!picture.isEmpty()) {
             imgUrl.append(PICASSO_ENDPOINT);
-            imgUrl.append(movie.getPosterPath());
+            imgUrl.append(picture);
         }
         return imgUrl.toString();
     }

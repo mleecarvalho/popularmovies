@@ -19,6 +19,7 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.ConvertUtils.convertDoubleToDecimal;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.ConvertUtils.formatDate;
 
 public class ItemDetailActivity extends AppCompatActivity
         implements ItemDetailContract.View{
@@ -33,8 +34,6 @@ public class ItemDetailActivity extends AppCompatActivity
     protected Toolbar toolbar;
     @BindView(R.id.iv_movie_poster)
     protected ImageView moviePoster;
-    @BindView(R.id.tv_movie_title)
-    protected TextView movieTitle;
     @BindView(R.id.tv_movie_rating)
     protected TextView movieRating;
     @BindView(R.id.tv_movie_release_date)
@@ -62,14 +61,12 @@ public class ItemDetailActivity extends AppCompatActivity
 
     private void setupFields() {
         getSupportActionBar().setTitle(movie.getTitle());
-        movieTitle.setText(movie.getTitle());
+        collapsingToolbarLayout.setTitle(movie.getTitle());
         movieRating.setText(convertDoubleToDecimal(movie.getVoteAverage()));
-        movieReleaseDate.setText(movie.getReleaseDate());
+        movieReleaseDate.setText(formatDate(movie.getReleaseDate()));
         movieSynopsis.setText(movie.getOverview());
-        presenter.loadMovieImage(moviePoster,movie);
-        presenter.loadCollapseImage(movieBackdropImage, movie);
-
-
+        presenter.loadMovieImage(moviePoster,movie.getPosterPath());
+        presenter.loadCollapseImage(movieBackdropImage, movie.getBackdropPath());
     }
 
     @Override

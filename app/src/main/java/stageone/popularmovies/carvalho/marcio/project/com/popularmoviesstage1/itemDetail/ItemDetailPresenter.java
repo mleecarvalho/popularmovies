@@ -21,18 +21,18 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
         this.context = context;
     }
 
-    @Override public void loadMovieImage(ImageView imageView, Movie movie) {
+    @Override public void loadMovieImage(ImageView imageView, String imagePath) {
         Picasso.with(context)
-                .load(dbConnection.getPicassoImageURL(movie))
+                .load(dbConnection.getPicassoImageURL(imagePath))
                 .error(R.drawable.no_image)
                 .placeholder(R.drawable.no_image)
                 .into(imageView);
 
     }
 
-    @Override public void loadCollapseImage(ImageView imageView, Movie movie) {
+    @Override public void loadCollapseImage(ImageView imageView, String imagePath) {
         Picasso.with(context)
-                .load(dbConnection.getPicassoImageURL(movie))
+                .load(dbConnection.getPicassoImageURL(imagePath))
                 .into(imageView, collapeCallback(imageView));
 
     }

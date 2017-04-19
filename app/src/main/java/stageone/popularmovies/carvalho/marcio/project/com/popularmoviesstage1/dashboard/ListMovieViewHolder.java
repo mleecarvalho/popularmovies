@@ -38,7 +38,7 @@ public class ListMovieViewHolder extends RecyclerView.ViewHolder {
 
     private void getPicture() {
         Picasso.with(itemView.getContext())
-                .load(movieConnection.getPicassoImageURL(movie))
+                .load(movieConnection.getPicassoImageURL(movie.getPosterPath()))
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.no_image)
                 .into(movieImage);
