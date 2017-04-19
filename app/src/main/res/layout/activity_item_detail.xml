@@ -17,7 +17,7 @@
       android:fitsSystemWindows="true">
 
     <android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/collapsing_toolbar"
+        android:id="@+id/collapse_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -27,7 +27,7 @@
         android:fitsSystemWindows="true">
 
       <ImageView
-          android:id="@+id/movieBackdropImage"
+          android:id="@+id/collapse_image"
           android:layout_width="match_parent"
           android:layout_height="350dp"
           android:scaleType="centerCrop"
@@ -66,22 +66,53 @@
           android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_movie_poster"
+            android:id="@+id/movie_item_image"
             android:layout_width="185dp"
             android:layout_height="277dp"
             android:src="@drawable/no_image"/>
 
-        <FrameLayout
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp">
 
           <LinearLayout
               android:orientation="vertical"
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/original_title"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/original_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/year_title"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/release_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00/00/000"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,52 +121,34 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"/>
 
-            <TextView
-                android:id="@+id/tv_movie_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rating"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:layout_marginBottom="16dp"/>
 
-            <TextView
+            <RatingBar
+                android:id="@+id/rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/release_date_title"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/tv_movie_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00/00/000"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:layout_marginTop="8dp"
+                android:theme="@style/RatingBar"
+                android:numStars="5"
+                android:stepSize="0.0"
+                android:rating="5.0"
+                style="?android:attr/ratingBarStyleSmall"/>
           </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
 
       </LinearLayout>
       <LinearLayout
           android:orientation="vertical"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:paddingTop="16dp">
+          android:paddingTop="8dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sinopsis_title"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_movie_synopsis"
+            android:id="@+id/synopse_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sinopsis"
             android:textColor="@color/white"
+            android:layout_toRightOf="@id/movie_item_image"
             android:textSize="18sp"/>
 
       </LinearLayout>

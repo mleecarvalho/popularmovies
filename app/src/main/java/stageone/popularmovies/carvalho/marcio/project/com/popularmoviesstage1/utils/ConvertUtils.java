@@ -10,15 +10,21 @@ import java.util.Locale;
 
 public class ConvertUtils {
 
-    public static String convertDoubleToDecimal(double value) {
-        DecimalFormatSymbols symbol = new DecimalFormatSymbols();
-        DecimalFormat decimalFormat = new DecimalFormat("#,##0.0", symbol);
-        return decimalFormat.format(value);
-    }
-
-    public static String formatDate(String dateStr){
+    public static String formatToGregorianDate(String dateStr){
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = format1.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return format2.format(date);
+    }
+
+    public static String getYearAmericanDate(String dateStr){
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format2 = new SimpleDateFormat("yyyy");
         Date date = null;
         try {
             date = format1.parse(dateStr);

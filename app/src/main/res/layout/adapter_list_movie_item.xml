@@ -2,14 +2,16 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="185dp"
-    android:layout_height="277dp"
-    android:layout_margin="7dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
   <ImageView
       android:id="@+id/movie_image"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:minWidth="185dp"
+      android:minHeight="277dp"
+      android:adjustViewBounds="true"
       />
 
   <RelativeLayout
