@@ -68,11 +68,7 @@ public class MovieDBConnection {
             scanner.useDelimiter("\\A");
 
             boolean hasInput = scanner.hasNext();
-            if (hasInput) {
-                return scanner.next();
-            } else {
-                return null;
-            }
+            return (hasInput) ? scanner.next(): null;
         } finally {
             urlConnection.disconnect();
         }

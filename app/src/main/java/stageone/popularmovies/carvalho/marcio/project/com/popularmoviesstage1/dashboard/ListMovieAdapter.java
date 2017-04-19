@@ -31,10 +31,7 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieViewHolder> 
 
     @Override
     public int getItemCount() {
-        if(listMovie != null) {
-            return listMovie.size();
-        }
-        return 0;
+        return (listMovie != null) ? listMovie.size() : 0;
     }
 
     public void setMovieList(List<Movie> listMovie) {
