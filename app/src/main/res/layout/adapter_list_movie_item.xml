@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="185dp"
     android:layout_height="277dp"
-    android:layout_margin="8dp">
+    android:layout_margin="7dp">
 
   <ImageView
       android:id="@+id/movie_image"
@@ -12,23 +12,33 @@
       android:layout_height="match_parent"
       />
 
-  <LinearLayout
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom"
-      android:padding="8dp">
-
-    <TextView
-        android:id="@+id/movie_title"
-        android:layout_width="wrap_content"
+      android:backgroundTint="@color/transparent">
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="@string/app_name"
-        />
+        android:background="@color/black_transparent"
+        android:minHeight="62dp"
+        android:textAlignment="center"
+        android:padding="8dp"
+        >
+      <TextView
+          android:id="@+id/movie_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:textColor="@android:color/white"
+          android:textSize="18sp"
+          android:textStyle="bold"
+          android:text="@string/app_name"
+          />
 
-  </LinearLayout>
+
+    </RelativeLayout>
+
+  </RelativeLayout>
 
 </FrameLayout>

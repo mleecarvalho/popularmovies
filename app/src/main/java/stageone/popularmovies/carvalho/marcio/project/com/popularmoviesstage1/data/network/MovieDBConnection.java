@@ -65,7 +65,6 @@ public class MovieDBConnection {
 
     private static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-    //    urlConnection.setRequestProperty("X-HEADER",API_READTOKEN);
         try {
             InputStream in = urlConnection.getInputStream();
 

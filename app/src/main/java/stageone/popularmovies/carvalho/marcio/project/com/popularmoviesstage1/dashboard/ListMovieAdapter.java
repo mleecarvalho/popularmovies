@@ -12,11 +12,16 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.da
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieViewHolder> {
 
     private List<Movie> listMovie = new ArrayList<>();
+    private ListMoviewContract.View view;
+
+    public ListMovieAdapter(ListMoviewContract.View view) {
+        this.view = view;
+    }
 
     @Override public ListMovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.adapter_list_movie_item, parent, false);
-        return new ListMovieViewHolder(view);
+        View inflateView = inflater.inflate(R.layout.adapter_list_movie_item, parent, false);
+        return new ListMovieViewHolder(inflateView, this.view);
     }
 
     @Override public void onBindViewHolder(ListMovieViewHolder holder, int position) {

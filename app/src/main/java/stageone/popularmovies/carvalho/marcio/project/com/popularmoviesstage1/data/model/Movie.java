@@ -8,9 +8,6 @@ import org.json.JSONObject;
 
 public class Movie implements Parcelable {
 
-    private static final String TAG = "Movie";
-    public static final String MOVIE_KEY = "movie";
-
     private String posterPath;
     private boolean adult;
     private String overview;
@@ -41,7 +38,6 @@ public class Movie implements Parcelable {
             video = jsonObject.getBoolean("video");
             voteAverage = jsonObject.getDouble("vote_average");
         } catch (JSONException e) {
-            Log.e(TAG, e.getMessage());
         }
     }
 

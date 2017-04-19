@@ -8,6 +8,7 @@ public interface ListMoviewContract {
         void fillList(List<Movie> listMovie);
         void showLoading();
         void hideLoading();
+        void openItem(Movie movie);
     }
 
     public interface Presenter{

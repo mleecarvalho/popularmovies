@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.squareup.picasso.Picasso;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
@@ -18,12 +19,14 @@ public class ListMovieViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.movie_title)
     protected TextView movieTitle;
     protected MovieDBConnection movieConnection = MovieDBConnection.getInstance();
+    protected ListMoviewContract.View view;
 
     private Movie movie;
 
-    public ListMovieViewHolder(View itemView) {
+    public ListMovieViewHolder(View itemView, ListMoviewContract.View mView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        this.view = mView;
     }
 
     public void bind(Movie movie){
@@ -39,6 +42,11 @@ public class ListMovieViewHolder extends RecyclerView.ViewHolder {
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.no_image)
                 .into(movieImage);
+    }
+
+    @OnClick(R.id.movie_image)
+    public void onClick(View view){
+        this.view.openItem(movie);
     }
 
 }

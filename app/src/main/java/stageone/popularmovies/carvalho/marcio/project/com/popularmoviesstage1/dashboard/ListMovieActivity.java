@@ -1,5 +1,6 @@
 package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.itemDetail.ItemDetailActivity;
 
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.POPULARITY;
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.RATING;
@@ -54,7 +56,7 @@ public class ListMovieActivity extends AppCompatActivity
         layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        listMovieAdapter = new ListMovieAdapter();
+        listMovieAdapter = new ListMovieAdapter(this);
         recyclerView.setAdapter(listMovieAdapter);
     }
 
@@ -103,5 +105,11 @@ public class ListMovieActivity extends AppCompatActivity
 
     @Override public void hideLoading() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override public void openItem(Movie movie) {
+        Intent intent = new Intent(ListMovieActivity.this, ItemDetailActivity.class);
+        intent.putExtra("movie", movie);
+        startActivity(intent);
     }
 }
