@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.MovieProcessor;
 
 public class MovieDBConnection {
     private final static String API_DBKEY = "3502fee1eb0ff1815d316905b20662eb";
@@ -95,15 +96,7 @@ public class MovieDBConnection {
         JSONObject jsonResponse = new JSONObject(json);
         JSONArray results = jsonResponse.getJSONArray("results");
 
-        ArrayList<Movie> movieList = new ArrayList<>();
-
-        for(int i = 0; i < results.length(); i++) {
-            JSONObject movieJsonObject = results.getJSONObject(i);
-            Movie movie = new Movie(movieJsonObject);
-            movieList.add(movie);
-        }
-
-        return movieList;
+        return MovieProcessor.process(results);
     }
 
 }

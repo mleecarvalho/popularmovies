@@ -22,23 +22,20 @@ public class Movie implements Parcelable {
     private boolean video;
     private double voteAverage;
 
-    public Movie(JSONObject jsonObject) {
-        try {
-            posterPath = jsonObject.getString("poster_path");
-            adult = jsonObject.getBoolean("adult");
-            overview = jsonObject.getString("overview");
-            releaseDate = jsonObject.getString("release_date");
-            id = jsonObject.getInt("id");
-            originalTitle = jsonObject.getString("original_title");
-            originalLanguage = jsonObject.getString("original_language");
-            title = jsonObject.getString("title");
-            backdropPath = jsonObject.getString("backdrop_path");
-            popularity = jsonObject.getDouble("popularity");
-            voteCount = jsonObject.getInt("vote_count");
-            video = jsonObject.getBoolean("video");
-            voteAverage = jsonObject.getDouble("vote_average");
-        } catch (JSONException e) {
-        }
+    protected Movie(JSONObject jsonObject) {
+        posterPath = jsonObject.optString("poster_path");
+        adult = jsonObject.optBoolean("adult");
+        overview = jsonObject.optString("overview");
+        releaseDate = jsonObject.optString("release_date");
+        id = jsonObject.optInt("id");
+        originalTitle = jsonObject.optString("original_title");
+        originalLanguage = jsonObject.optString("original_language");
+        title = jsonObject.optString("title");
+        backdropPath = jsonObject.optString("backdrop_path");
+        popularity = jsonObject.optDouble("popularity");
+        voteCount = jsonObject.optInt("vote_count");
+        video = jsonObject.optBoolean("video");
+        voteAverage = jsonObject.optDouble("vote_average");
     }
 
     public Movie(Parcel parcel) {
