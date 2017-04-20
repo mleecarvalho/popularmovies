@@ -12,8 +12,10 @@ public interface ListMoviewContract {
     }
 
     public interface Presenter{
-       void loadData(ListMovieOrderBy orderBy);
+        void loadData();
         void updateList(List<Movie> listMovie);
+        void setOrderBy(ListMovieOrderBy orderBy);
+        ListMovieOrderBy getOrderBy();
     }
 
 }

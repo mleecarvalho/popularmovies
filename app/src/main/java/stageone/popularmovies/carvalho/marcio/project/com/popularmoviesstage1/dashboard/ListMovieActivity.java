@@ -17,12 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
-import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.itemDetail.ItemDetailActivity;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.itemDetail.
+        ItemDetailActivity;
 
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.POPULARITY;
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.RATING;
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.hasInternetConnection;
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.showConnectionError;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
+        dashboard.ListMovieOrderBy.POPULARITY;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.
+        ListMovieOrderBy.RATING;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.
+        NetConnection.hasInternetConnection;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.
+        NetConnection.showConnectionError;
 
 public class ListMovieActivity extends AppCompatActivity
         implements ListMoviewContract.View{
@@ -48,7 +53,7 @@ public class ListMovieActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         setPresenter();
         setAdapter();
-        presenter.loadData(POPULARITY);
+        presenter.loadData();
 
     }
 
@@ -72,21 +77,23 @@ public class ListMovieActivity extends AppCompatActivity
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.ordey_by_popularity :
-                reloadList(POPULARITY);
+                presenter.setOrderBy(POPULARITY);
+                reloadList();
                 return true;
             case R.id.order_by_rating :
-                reloadList(RATING);
+                presenter.setOrderBy(RATING);
+                reloadList();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void reloadList(ListMovieOrderBy type) {
+    private void reloadList() {
         List<Movie> movieList = new ArrayList<>();
         if(hasInternetConnection(this)) {
             setAdapter();
             ListMovieAsyncTask task =  new ListMovieAsyncTask(this);
-            task.execute(type);
+            task.execute(presenter.getOrderBy());
         } else {
             showConnectionError(this);
         }
