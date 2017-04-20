@@ -92,8 +92,7 @@ public class ListMovieActivity extends AppCompatActivity
         List<Movie> movieList = new ArrayList<>();
         if(hasInternetConnection(this)) {
             setAdapter();
-            ListMovieAsyncTask task =  new ListMovieAsyncTask(this);
-            task.execute(presenter.getOrderBy());
+            presenter.loadData();
         } else {
             showConnectionError(this);
         }
@@ -110,7 +109,7 @@ public class ListMovieActivity extends AppCompatActivity
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    @Override public void hideLoading() {
+    private void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
 

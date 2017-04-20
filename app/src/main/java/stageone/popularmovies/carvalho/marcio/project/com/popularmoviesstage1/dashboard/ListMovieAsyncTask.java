@@ -7,16 +7,16 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.da
 
 public class ListMovieAsyncTask extends AsyncTask<ListMovieOrderBy,Void,ArrayList<Movie>>{
 
-    private ListMoviewContract.View view;
+    private ListMoviewContract.AsyncTask asyncTask;
     private MovieDBConnection dbConnection = MovieDBConnection.getInstance();
 
-    public ListMovieAsyncTask(ListMoviewContract.View view) {
-        this.view = view;
+    public ListMovieAsyncTask(ListMoviewContract.AsyncTask asyncTask) {
+        this.asyncTask = asyncTask;
     }
 
     @Override protected void onPreExecute() {
         super.onPreExecute();
-        view.showLoading();
+        asyncTask.processStart();
     }
 
     @Override protected ArrayList<Movie> doInBackground(ListMovieOrderBy... listMovieOrderBies) {
@@ -28,7 +28,7 @@ public class ListMovieAsyncTask extends AsyncTask<ListMovieOrderBy,Void,ArrayLis
 
     @Override protected void onPostExecute(ArrayList<Movie> movies) {
         super.onPostExecute(movies);
-        view.fillList(movies);
+        asyncTask.processFinish(movies);
     }
 
 }

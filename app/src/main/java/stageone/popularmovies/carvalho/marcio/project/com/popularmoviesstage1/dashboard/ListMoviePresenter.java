@@ -10,7 +10,7 @@ import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesst
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.showConnectionError;
 
 public class ListMoviePresenter
-        implements ListMoviewContract.Presenter {
+        implements ListMoviewContract.Presenter, ListMoviewContract.AsyncTask {
 
     private final ListMoviewContract.View view;
     private final Context context;
@@ -26,7 +26,7 @@ public class ListMoviePresenter
         listMove = new ArrayList<>();
 
         if(hasInternetConnection(context)) {
-            ListMovieAsyncTask task = new ListMovieAsyncTask(view);
+            ListMovieAsyncTask task = new ListMovieAsyncTask(this);
             task.execute(getOrderBy());
         } else {
             showConnectionError(context);
@@ -48,4 +48,11 @@ public class ListMoviePresenter
         this.orderBy = orderBy;
     }
 
+    @Override public void processStart() {
+        view.showLoading();
+    }
+
+    @Override public void processFinish(ArrayList<Movie> movies) {
+        view.fillList(movies);
+    }
 }
