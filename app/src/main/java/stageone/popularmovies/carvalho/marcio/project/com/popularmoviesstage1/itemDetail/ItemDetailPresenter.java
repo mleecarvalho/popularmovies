@@ -8,18 +8,17 @@ import android.widget.ImageView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
-import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
         data.network.MovieDBConnection;
 
 public class ItemDetailPresenter implements ItemDetailContract.Presenter {
 
-    private final Context context;
+    private ItemDetailContract.View view;
+    private Context context;
 
     private MovieDBConnection dbConnection = MovieDBConnection.getInstance();
 
-    public ItemDetailPresenter(Context context) {
-        this.context = context;
+    public ItemDetailPresenter() {
     }
 
     @Override public void loadMovieImage(ImageView imageView, String imagePath) {
@@ -45,7 +44,7 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
                 Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
                     public void onGenerated(Palette palette) {
-                        ((ItemDetailActivity) context).setCollapsePallete(palette);
+                        view.setCollapsePallete(palette);
                     }
                 });
             }
@@ -57,4 +56,13 @@ public class ItemDetailPresenter implements ItemDetailContract.Presenter {
         };
     }
 
+    @Override public void attachView(ItemDetailContract.View view) {
+        this.view = view;
+        this.context = ((ItemDetailActivity) view).getBaseContext();
+    }
+
+    @Override public void detachView() {
+        this.view = null;
+        this.context = null;
+    }
 }

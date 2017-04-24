@@ -2,7 +2,6 @@ package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.d
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -52,6 +51,11 @@ public class ListMovieActivity extends AppCompatActivity
         presenter.loadData(savedInstanceState);
     }
 
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
     private void setAdapter() {
         layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -61,7 +65,8 @@ public class ListMovieActivity extends AppCompatActivity
     }
 
     private void setPresenter() {
-        presenter = new ListMoviePresenter(this);
+        presenter = new ListMoviePresenter();
+        presenter.attachView(this);
     }
 
     @Override protected void onSaveInstanceState(Bundle outState) {

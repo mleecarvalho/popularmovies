@@ -2,7 +2,7 @@ package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.d
 
 import android.os.Bundle;
 import java.util.ArrayList;
-import java.util.List;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.PresenterContract;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 
 public interface ListMoviewContract {
@@ -12,7 +12,7 @@ public interface ListMoviewContract {
         void openItem(Movie movie);
     }
 
-    public interface Presenter{
+    public interface Presenter extends PresenterContract<View>{
         void loadData(Bundle savedInstanceState);
         void reloadData(ListMovieOrderBy orderBy);
         void updateList(ArrayList<Movie> listMovie);

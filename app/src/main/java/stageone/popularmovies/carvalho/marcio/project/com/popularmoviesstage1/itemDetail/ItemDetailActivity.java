@@ -1,6 +1,5 @@
 package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.itemDetail;
 
-import android.content.res.Configuration;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -18,8 +16,6 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieAsyncTask.LISTKEY;
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
-        utils.ConvertUtils.formatToGregorianDate;
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
         utils.ConvertUtils.getYearAmericanDate;
 
@@ -53,12 +49,18 @@ public class ItemDetailActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         this.movie = getIntent().getParcelableExtra(LISTKEY);
-        setupPresenter();
+        setPresenter();
         setupFields();
     }
 
-    private void setupPresenter() {
-        this.presenter = new ItemDetailPresenter(this);
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    private void setPresenter() {
+        this.presenter = new ItemDetailPresenter();
+        this.presenter.attachView(this);
     }
 
     private void setupFields() {

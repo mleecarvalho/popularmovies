@@ -17,13 +17,11 @@ import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesst
 public class ListMoviePresenter
         implements ListMoviewContract.Presenter, ListMoviewContract.AsyncTask {
 
-    private final ListMoviewContract.View view;
-    private final Context context;
+    private ListMoviewContract.View view;
+    private Context context;
     private ArrayList<Movie> listMove;
 
-    public ListMoviePresenter(ListMoviewContract.View view) {
-        this.view = view;
-        this.context =((ListMovieActivity) view).getBaseContext();
+    public ListMoviePresenter() {
     }
 
     private void executeAsyncTaskData(ListMovieOrderBy orderBy) {
@@ -63,5 +61,15 @@ public class ListMoviePresenter
 
     @Override public void processFinish(ArrayList<Movie> movies) {
         view.fillList(movies);
+    }
+
+    @Override public void attachView(ListMoviewContract.View view) {
+        this.view = view;
+        this.context = ((ListMovieActivity) view).getBaseContext();
+    }
+
+    @Override public void detachView() {
+        this.view = null;
+        this.context = null;
     }
 }
