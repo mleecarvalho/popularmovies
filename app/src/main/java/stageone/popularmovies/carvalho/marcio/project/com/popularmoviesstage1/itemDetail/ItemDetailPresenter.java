@@ -9,7 +9,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
-import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.network.MovieDBConnection;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
+        data.network.MovieDBConnection;
 
 public class ItemDetailPresenter implements ItemDetailContract.Presenter {
 

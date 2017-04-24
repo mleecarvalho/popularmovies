@@ -19,6 +19,8 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.da
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.itemDetail.
         ItemDetailActivity;
 
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.
+        ListMovieAsyncTask.LISTKEY;
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
         dashboard.ListMovieOrderBy.POPULARITY;
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.
@@ -47,11 +49,7 @@ public class ListMovieActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setPresenter();
         setAdapter();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        presenter.loadData();
+        presenter.loadData(savedInstanceState);
     }
 
     private void setAdapter() {
@@ -66,6 +64,13 @@ public class ListMovieActivity extends AppCompatActivity
         presenter = new ListMoviePresenter(this);
     }
 
+    @Override protected void onSaveInstanceState(Bundle outState) {
+        ArrayList<Movie> movies = presenter.getListMovie();
+        if(movies != null)
+            outState.putParcelableArrayList(LISTKEY,movies);
+        super.onSaveInstanceState(outState);
+    }
+
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_list_movie, menu);
         return true;
@@ -74,29 +79,27 @@ public class ListMovieActivity extends AppCompatActivity
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.ordey_by_popularity :
-                presenter.setOrderBy(POPULARITY);
-                reloadList();
+                reloadList(POPULARITY);
                 return true;
             case R.id.order_by_rating :
-                presenter.setOrderBy(RATING);
-                reloadList();
+                reloadList(RATING);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void reloadList() {
+    private void reloadList(ListMovieOrderBy orderBy) {
         List<Movie> movieList = new ArrayList<>();
         if(hasInternetConnection(this)) {
             setAdapter();
-            presenter.loadData();
+            presenter.reloadData(orderBy);
         } else {
             showConnectionError(this);
         }
     }
 
     @Override
-    public void fillList(List<Movie> listMovie) {
+    public void fillList(ArrayList<Movie> listMovie) {
         hideLoading();
         presenter.updateList(listMovie);
         listMovieAdapter.setMovieList(listMovie);
@@ -112,7 +115,7 @@ public class ListMovieActivity extends AppCompatActivity
 
     @Override public void openItem(Movie movie) {
         Intent intent = new Intent(ListMovieActivity.this, ItemDetailActivity.class);
-        intent.putExtra("movie", movie);
+        intent.putExtra(LISTKEY, movie);
         startActivity(intent);
     }
 }

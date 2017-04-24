@@ -10,7 +10,8 @@ import butterknife.OnClick;
 import com.squareup.picasso.Picasso;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
-import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.network.MovieDBConnection;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.
+        network.MovieDBConnection;
 
 public class ListMovieViewHolder extends RecyclerView.ViewHolder {
 

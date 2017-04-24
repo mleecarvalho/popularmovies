@@ -3,10 +3,12 @@ package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.d
 import android.os.AsyncTask;
 import java.util.ArrayList;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
-import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.network.MovieDBConnection;
+import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data
+        .network.MovieDBConnection;
 
 public class ListMovieAsyncTask extends AsyncTask<ListMovieOrderBy,Void,ArrayList<Movie>>{
 
+    public static final String LISTKEY = "Movies";
     private ListMoviewContract.AsyncTask asyncTask;
     private MovieDBConnection dbConnection = MovieDBConnection.getInstance();
 

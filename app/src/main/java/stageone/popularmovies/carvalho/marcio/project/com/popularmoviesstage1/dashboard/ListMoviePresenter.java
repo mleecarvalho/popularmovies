@@ -1,51 +1,60 @@
 package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard;
 
 import android.content.Context;
+import android.os.Bundle;
 import java.util.ArrayList;
-import java.util.List;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieOrderBy.POPULARITY;
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.hasInternetConnection;
-import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils.NetConnection.showConnectionError;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
+        dashboard.ListMovieAsyncTask.LISTKEY;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
+        dashboard.ListMovieOrderBy.POPULARITY;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
+        utils.NetConnection.hasInternetConnection;
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
+        utils.NetConnection.showConnectionError;
 
 public class ListMoviePresenter
         implements ListMoviewContract.Presenter, ListMoviewContract.AsyncTask {
 
     private final ListMoviewContract.View view;
     private final Context context;
-    private List<Movie> listMove;
-    private static ListMovieOrderBy orderBy;
+    private ArrayList<Movie> listMove;
 
     public ListMoviePresenter(ListMoviewContract.View view) {
         this.view = view;
         this.context =((ListMovieActivity) view).getBaseContext();
     }
 
-    @Override public void loadData() {
-        listMove = new ArrayList<>();
-
+    private void executeAsyncTaskData(ListMovieOrderBy orderBy) {
         if(hasInternetConnection(context)) {
+            listMove = new ArrayList<>();
             ListMovieAsyncTask task = new ListMovieAsyncTask(this);
-            task.execute(getOrderBy());
+            task.execute(orderBy);
         } else {
             showConnectionError( (ListMovieActivity) view );
         }
-
     }
 
-    @Override public void updateList(List<Movie> listMovie) {
+    @Override public void loadData(Bundle savedInstanceState) {
+        if(savedInstanceState != null && savedInstanceState.containsKey(LISTKEY)) {
+            listMove = savedInstanceState.getParcelableArrayList(LISTKEY);
+            view.fillList(listMove);
+        }else{
+            executeAsyncTaskData(POPULARITY);
+        }
+    }
+
+    @Override public void reloadData(ListMovieOrderBy orderBy) {
+        executeAsyncTaskData(orderBy);
+    }
+
+    @Override public void updateList(ArrayList<Movie> listMovie) {
         this.listMove = listMovie;
     }
 
-    @Override
-    public ListMovieOrderBy getOrderBy() {
-        return (orderBy == null)? POPULARITY : orderBy;
-    }
-
-    @Override
-    public void setOrderBy(ListMovieOrderBy orderBy) {
-        this.orderBy = orderBy;
+    @Override public ArrayList<Movie> getListMovie() {
+        return this.listMove;
     }
 
     @Override public void processStart() {

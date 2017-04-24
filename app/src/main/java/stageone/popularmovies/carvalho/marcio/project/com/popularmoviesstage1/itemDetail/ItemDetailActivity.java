@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.R;
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.Movie;
 
+import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.dashboard.ListMovieAsyncTask.LISTKEY;
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
         utils.ConvertUtils.formatToGregorianDate;
 import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.
@@ -51,7 +52,7 @@ public class ItemDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_item_detail);
         ButterKnife.bind(this);
 
-        this.movie = getIntent().getParcelableExtra("movie");
+        this.movie = getIntent().getParcelableExtra(LISTKEY);
         setupPresenter();
         setupFields();
     }
