@@ -1,5 +1,6 @@
 package stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
@@ -24,8 +25,8 @@ public class NetConnection {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public static void showConnectionError(Context context){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    public static void showConnectionError(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(R.string.no_internet_msg)
                 .setTitle(R.string.connection_error_title);
         builder.setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {

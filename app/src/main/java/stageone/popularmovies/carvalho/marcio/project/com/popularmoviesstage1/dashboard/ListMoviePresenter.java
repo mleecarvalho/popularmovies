@@ -29,7 +29,7 @@ public class ListMoviePresenter
             ListMovieAsyncTask task = new ListMovieAsyncTask(this);
             task.execute(getOrderBy());
         } else {
-            showConnectionError(context);
+            showConnectionError( (ListMovieActivity) view );
         }
 
     }

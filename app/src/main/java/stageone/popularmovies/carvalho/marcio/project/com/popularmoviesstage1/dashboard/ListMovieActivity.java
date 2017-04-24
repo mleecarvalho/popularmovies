@@ -47,8 +47,11 @@ public class ListMovieActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setPresenter();
         setAdapter();
-        presenter.loadData();
+    }
 
+    @Override protected void onResume() {
+        super.onResume();
+        presenter.loadData();
     }
 
     private void setAdapter() {
