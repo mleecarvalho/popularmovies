@@ -6,7 +6,7 @@
     android:id="@+id/activity_movie_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:windowSoftInputMode="adjustResize">
 
   <android.support.design.widget.AppBarLayout
       android:id="@+id/app_bar_layout"
@@ -18,7 +18,7 @@
     <android.support.design.widget.CollapsingToolbarLayout
         android:id="@+id/collapse_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:contentScrim="?attr/colorPrimary"
         app:expandedTitleMarginStart="48dp"
@@ -39,6 +39,7 @@
           android:layout_height="?attr/actionBarSize"
           app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
           app:layout_collapseMode="pin"
+          app:expandedTitleGravity="bottom|center_horizontal"
           android:background="@android:color/transparent" />
 
     </android.support.design.widget.CollapsingToolbarLayout>
@@ -56,7 +57,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="16dp">
 
       <LinearLayout
@@ -145,7 +146,7 @@
             android:id="@+id/synopse_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sinopsis"
+            android:text="Sinopse"
             android:textColor="@color/white"
             android:layout_toRightOf="@id/movie_item_image"
             android:textSize="18sp"/>

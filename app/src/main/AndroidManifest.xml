@@ -22,7 +22,9 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".itemDetail.ItemDetailActivity">
+    <activity android:name=".itemDetail.ItemDetailActivity"
+        android:configChanges="orientation|screenSize"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
     </activity>
   </application>
 

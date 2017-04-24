@@ -6,7 +6,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,6 @@ public class ListMovieActivity extends AppCompatActivity
 
     @BindView(R.id.list_movie_appbar)
     protected AppBarLayout appBarLayout;
-    @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
     @BindView(R.id.list_move_progressbar)
     protected ProgressBar progressBar;
     @BindView(R.id.list_movie_recycleview)
@@ -50,7 +47,7 @@ public class ListMovieActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_movie);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle(R.string.app_name);
         setPresenter();
         setAdapter();
         presenter.loadData();
