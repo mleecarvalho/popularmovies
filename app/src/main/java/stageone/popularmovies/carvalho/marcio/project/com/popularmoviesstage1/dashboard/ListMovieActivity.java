@@ -31,8 +31,6 @@ import static stageone.popularmovies.carvalho.marcio.project.com.popularmoviesst
 public class ListMovieActivity extends AppCompatActivity
         implements ListMoviewContract.View{
 
-    @BindView(R.id.list_movie_appbar)
-    protected AppBarLayout appBarLayout;
     @BindView(R.id.list_move_progressbar)
     protected ProgressBar progressBar;
     @BindView(R.id.list_movie_recycleview)
@@ -47,7 +45,6 @@ public class ListMovieActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_movie);
         ButterKnife.bind(this);
-//        getSupportActionBar().setTitle(R.string.app_name);
         setPresenter();
         setAdapter();
         presenter.loadData();
