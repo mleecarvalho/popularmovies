@@ -19,7 +19,7 @@ public class ListMoviePresenter
 
     private ListMoviewContract.View view;
     private Context context;
-    private ArrayList<Movie> listMove;
+    private static ArrayList<Movie> listMove;
 
     public ListMoviePresenter() {
     }
@@ -34,13 +34,11 @@ public class ListMoviePresenter
         }
     }
 
-    @Override public void loadData(Bundle savedInstanceState) {
-        if(savedInstanceState != null && savedInstanceState.containsKey(LISTKEY)) {
-            listMove = savedInstanceState.getParcelableArrayList(LISTKEY);
+    @Override public void loadData(ListMovieOrderBy orderBy) {
+        if(listMove == null)
+            executeAsyncTaskData(orderBy);
+        else
             view.fillList(listMove);
-        }else{
-            executeAsyncTaskData(POPULARITY);
-        }
     }
 
     @Override public void reloadData(ListMovieOrderBy orderBy) {

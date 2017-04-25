@@ -13,7 +13,7 @@ public interface ListMoviewContract {
     }
 
     public interface Presenter extends PresenterContract<View>{
-        void loadData(Bundle savedInstanceState);
+        void loadData(ListMovieOrderBy orderBy);
         void reloadData(ListMovieOrderBy orderBy);
         void updateList(ArrayList<Movie> listMovie);
         ArrayList<Movie> getListMovie();

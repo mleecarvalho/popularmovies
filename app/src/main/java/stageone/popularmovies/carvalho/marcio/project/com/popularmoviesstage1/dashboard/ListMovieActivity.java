@@ -40,6 +40,8 @@ public class ListMovieActivity extends AppCompatActivity
     private RecyclerView.LayoutManager layoutManager;
     private ListMovieAdapter listMovieAdapter;
     private ListMoviewContract.Presenter presenter;
+    private ListMovieOrderBy orderBy;
+    private final String ORDERBY_KEY = "orderBy";
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,12 @@ public class ListMovieActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setPresenter();
         setAdapter();
-        presenter.loadData(savedInstanceState);
+        setOrderBy();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        presenter.loadData(orderBy);
     }
 
     @Override protected void onDestroy() {
@@ -71,9 +78,25 @@ public class ListMovieActivity extends AppCompatActivity
 
     @Override protected void onSaveInstanceState(Bundle outState) {
         ArrayList<Movie> movies = presenter.getListMovie();
-        if(movies != null)
-            outState.putParcelableArrayList(LISTKEY,movies);
+        outState.putInt(ORDERBY_KEY,orderBy.getOrder());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null && savedInstanceState.containsKey(ORDERBY_KEY))
+            this.orderBy = ListMovieOrderBy.getOrderby(savedInstanceState.getInt(ORDERBY_KEY));
+    }
+
+    private void setOrderBy() {
+        if(orderBy == null)
+            orderBy = POPULARITY;
+    }
+    private boolean setOrderBy(ListMovieOrderBy order) {
+        boolean mustSet = (order == this.orderBy) ? false : true;
+        if(order != this.orderBy)
+            this.orderBy = order;
+        return mustSet;
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,16 +107,18 @@ public class ListMovieActivity extends AppCompatActivity
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.ordey_by_popularity :
-                reloadList(POPULARITY);
+                if(setOrderBy(POPULARITY))
+                    reloadList();
                 return true;
             case R.id.order_by_rating :
-                reloadList(RATING);
+                if(setOrderBy(RATING))
+                    reloadList();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void reloadList(ListMovieOrderBy orderBy) {
+    private void reloadList() {
         List<Movie> movieList = new ArrayList<>();
         if(hasInternetConnection(this)) {
             setAdapter();
