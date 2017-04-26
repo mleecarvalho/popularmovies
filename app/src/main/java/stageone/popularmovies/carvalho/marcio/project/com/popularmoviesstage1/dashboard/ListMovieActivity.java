@@ -50,7 +50,7 @@ public class ListMovieActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setPresenter();
         setAdapter();
-        setOrderBy();
+        setupOrderBy();
     }
 
     @Override protected void onResume() {
@@ -88,13 +88,13 @@ public class ListMovieActivity extends AppCompatActivity
             this.orderBy = ListMovieOrderBy.getOrderby(savedInstanceState.getInt(ORDERBY_KEY));
     }
 
-    private void setOrderBy() {
+    private void setupOrderBy() {
         if(orderBy == null)
             orderBy = POPULARITY;
     }
     private boolean setOrderBy(ListMovieOrderBy order) {
         boolean mustSet = (order == this.orderBy) ? false : true;
-        if(order != this.orderBy)
+        if(mustSet)
             this.orderBy = order;
         return mustSet;
     }

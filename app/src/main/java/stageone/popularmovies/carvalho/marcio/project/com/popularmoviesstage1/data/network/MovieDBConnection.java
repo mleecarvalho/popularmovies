@@ -17,7 +17,7 @@ import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.da
 import stageone.popularmovies.carvalho.marcio.project.com.popularmoviesstage1.data.model.MovieProcessor;
 
 public class MovieDBConnection {
-    private final static String API_DBKEY = "3502fee1eb0ff1815d316905b20662eb";
+    private final static String API_DBKEY = "...";
     private final static String MOVIEDB_ENDPOINT = "https://api.themoviedb.org/";
     private final static String PICASSO_ENDPOINT = "http://image.tmdb.org/t/p/w185";
     private final static String POPULARITY_PATH = "3/movie/popular";
